@@ -41,17 +41,7 @@
       );
     }
 
-    const InputForm = () => {
-      const [counter, setCounter] = React.useState(1);
-
-      console.log("카운타", counter)
-
-      function handleFormSubmit() {
-        event.preventDefault();
-        console.log("폼 전송됨");
-        setCounter(counter + 1);
-      }
-
+    const InputForm = ({ handleFormSubmit }) => {
       return (
         <form onSubmit={handleFormSubmit}>
           <input type="text" name="name" placeholder="영어 대사를 입력해주세요" />
@@ -97,18 +87,30 @@
       );
     }
 
-    const app = (
-      <div>
-        <Title>1번째 고양이 가라사대</Title>
-        <InputForm />
-        <MainCard img="https://cataas.com/cat/60b73094e04e18001194a309/says/react" />
-        <Favorites />
-      </div>
-    );
+    const App = () => {
+      const [counter, setCounter] = React.useState(1);
+
+      console.log("카운터", counter)
+
+      function handleFormSubmit() {
+        event.preventDefault();
+        console.log("폼 전송됨");
+        setCounter(counter + 1);
+      }
+
+      return (
+        <div>
+          <Title>{counter}번째 고양이 가라사대</Title>
+          <InputForm handleFormSubmit={handleFormSubmit} />
+          <MainCard img="https://cataas.com/cat/60b73094e04e18001194a309/says/react" />
+          <Favorites />
+        </div>
+      );
+    }
 
     const 여기다가그려 = document.querySelector('#app');
 
-    ReactDOM.render(app, 여기다가그려);
+    ReactDOM.render(<App />, 여기다가그려);
   </script>
 </body>
 
